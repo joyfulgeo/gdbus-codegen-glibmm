@@ -113,8 +113,8 @@ public:
     static Glib::VariantContainerBase TestByteString_pack(
         const std::string & arg_Param1) {
         Glib::VariantContainerBase base;
-        Glib::Variant<std::string> params =
-            Glib::Variant<std::string>::create(arg_Param1);
+        Glib::Variant<std::string> params = 
+            Glib::Variant<std::string>(g_variant_new_from_data (G_VARIANT_TYPE ("ay"), arg_Param1.data(), arg_Param1.size(), TRUE, NULL, NULL));
         return Glib::VariantContainerBase::create_tuple(params);
     }
 
@@ -270,8 +270,8 @@ public:
             Glib::Variant<std::vector<Glib::ustring>>::create(arg_in_Param3);
         params.push_back(in_Param3_param);
 
-        Glib::Variant<std::string> in_Param4_param =
-            Glib::Variant<std::string>::create(arg_in_Param4);
+        Glib::Variant<std::string> in_Param4_param = 
+            Glib::Variant<std::string>(g_variant_new_from_data (G_VARIANT_TYPE ("ay"), arg_in_Param4.data(), arg_in_Param4.size(), TRUE, NULL, NULL));
         params.push_back(in_Param4_param);
 
         Glib::VariantStringBase in_Param5_param;

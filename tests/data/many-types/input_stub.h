@@ -3,7 +3,7 @@
 #include <vector>
 #include <glibmm.h>
 #include <giomm.h>
-#include "OUTPUT_DIR/input_common.h"
+#include "input_common.h"
 
 namespace org {
 namespace gdbus {
@@ -767,8 +767,8 @@ public:
 
     void ret(const std::string & p0) {
         std::vector<Glib::VariantBase> vlist;
-        Glib::Variant<std::string> var0 =
-            Glib::Variant<std::string>::create(p0);
+        Glib::Variant<std::string> var0 = 
+            Glib::Variant<std::string>(g_variant_new_from_data (G_VARIANT_TYPE ("ay"), p0.data(), p0.size(), TRUE, NULL, NULL));
         vlist.push_back(var0);
 
         m_message->return_value(Glib::Variant<Glib::VariantBase>::create_tuple(vlist));
@@ -920,8 +920,8 @@ public:
         Glib::Variant<std::vector<Glib::ustring>> var2 =
             Glib::Variant<std::vector<Glib::ustring>>::create(p2);
         vlist.push_back(var2);
-        Glib::Variant<std::string> var3 =
-            Glib::Variant<std::string>::create(p3);
+        Glib::Variant<std::string> var3 = 
+            Glib::Variant<std::string>(g_variant_new_from_data (G_VARIANT_TYPE ("ay"), p3.data(), p3.size(), TRUE, NULL, NULL));
         vlist.push_back(var3);
         Glib::VariantStringBase var4;
         Glib::VariantStringBase::create_signature(var4, p4.c_str());

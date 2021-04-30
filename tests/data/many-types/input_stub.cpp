@@ -336,7 +336,7 @@ static const char interfaceXml0[] = R"XML_DELIMITER(<!DOCTYPE node PUBLIC "-//fr
 </node>
 )XML_DELIMITER";
 
-#include "OUTPUT_DIR/input_stub.h"
+#include "input_stub.h"
 
 template<class T>
 inline T specialGetter(Glib::Variant<T> variant)

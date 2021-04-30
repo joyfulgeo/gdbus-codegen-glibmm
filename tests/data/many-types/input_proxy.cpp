@@ -4,7 +4,7 @@
  * The license of this code is the same as for the source it was derived from.
  */
 
-#include "OUTPUT_DIR/input_proxy.h"
+#include "input_proxy.h"
 
 #include <utility>
 
@@ -431,7 +431,7 @@ void org::gdbus::codegen::glibmm::TestProxy::TestByteString_finish(
 
     Glib::Variant<std::string> out_Param2_v;
     wrapped.get_child(out_Param2_v, 0);
-    out_Param2 = out_Param2_v.get();
+    out_Param2 = specialGetter(out_Param2_v);
 }
 
 std::string
@@ -450,7 +450,7 @@ org::gdbus::codegen::glibmm::TestProxy::TestByteString_sync(
     std::string out_Param2;
     Glib::Variant<std::string> out_Param2_v;
     wrapped.get_child(out_Param2_v, 0);
-    out_Param2 = out_Param2_v.get();
+    out_Param2 = specialGetter(out_Param2_v);
     return out_Param2;
 }
 
@@ -1208,7 +1208,7 @@ void org::gdbus::codegen::glibmm::TestProxy::TestAll_finish(
 
     Glib::Variant<std::string> out_out_Param4_v;
     wrapped.get_child(out_out_Param4_v, 3);
-    out_out_Param4 = out_out_Param4_v.get();
+    out_out_Param4 = specialGetter(out_out_Param4_v);
 
     Glib::Variant<Glib::DBusSignatureString> out_out_Param5_v;
     wrapped.get_child(out_out_Param5_v, 4);
@@ -1320,7 +1320,7 @@ org::gdbus::codegen::glibmm::TestProxy::TestAll_sync(
     std::string out_out_Param4;
     Glib::Variant<std::string> out_out_Param4_v;
     wrapped.get_child(out_out_Param4_v, 3);
-    out_out_Param4 = out_out_Param4_v.get();
+    out_out_Param4 = specialGetter(out_out_Param4_v);
 
     Glib::DBusSignatureString out_out_Param5;
     Glib::Variant<Glib::DBusSignatureString> out_out_Param5_v;

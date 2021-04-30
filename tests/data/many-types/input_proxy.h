@@ -4,7 +4,7 @@
 #include <vector>
 #include <glibmm.h>
 #include <giomm.h>
-#include "OUTPUT_DIR/input_common.h"
+#include "input_common.h"
 
 namespace org {
 namespace gdbus {

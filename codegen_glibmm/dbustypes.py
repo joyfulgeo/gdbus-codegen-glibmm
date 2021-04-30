@@ -136,7 +136,9 @@ class StringType(Type):
         Type.__init__(self, signature, cpptype)
 
     def cppvalue_send(self, name, param, cpp_class_name):
-        if self.signature == 's' or self.signature == 'ay':
+        if self.signature == 'ay':
+            return self.cppvalue_send_ay(name, param, cpp_class_name)
+        elif self.signature == 's':
             return Type.cppvalue_send(self, name, param, cpp_class_name)
         elif self.signature == 'g':
             method = 'create_signature'
@@ -146,6 +148,22 @@ class StringType(Type):
             "Glib::VariantStringBase::" + method + "(" + name +
             ", " + param + ".c_str());")
 
+    def cppvalue_get(self, outvar, idx, cpp_class_name):
+        """ Used to extract a cpptype_out out of a Variant """
+        if self.signature == 'ay':
+            varname = outvar + '_v'
+            return ("Glib::Variant<"+self.variant_type+"> "+varname+
+                ";\nwrapped.get_child("+varname+", "+idx+");\n"+
+                outvar+" = specialGetter("+varname+");")
+        return Type.cppvalue_get(self, outvar, idx, cpp_class_name)
+
+    def cppvalue_send_ay(self, name, param, cpp_class_name):
+        """ Used to create a GVariant of Byte Array to be sent over D-Bus """
+        return ( 'Glib::Variant<' + self.variant_type + '> ' + name + ' = ' +
+                    '\n    Glib::Variant<' + self.variant_type + '>(' +
+                    'g_variant_new_from_data (G_VARIANT_TYPE ("ay"), ' + 
+                    param + '.data(), ' + param + '.size(), ' + 
+                    'TRUE, NULL, NULL));')
 
 class VariantType(Type):
     def __init__(self):
