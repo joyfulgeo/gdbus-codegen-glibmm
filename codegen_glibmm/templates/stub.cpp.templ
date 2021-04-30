@@ -131,16 +131,11 @@ void {{ class_name_with_namespace }}::on_interface_get_property(
     if (property_name.compare("{{ prop.name }}") == 0) {
 
         {% if prop.signature == "ay" %}
-        gsize len;
-        char *data;
-
-        {{ prop.variant_type }} temp = {{ prop.name }}_get();
-        len = temp.size();
-        data = g_strndup (temp.c_str(), len);
-
-        GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
-        property = Glib::Variant<std::string>(newVar);
+        {{ prop.variant_type }} temp_{{ prop.name }} = {{ prop.name }}_get();
+        gsize len_{{ prop.name }} = temp_{{ prop.name }}.size();
+        gpointer data_{{ prop.name }} = g_memdup (temp_{{ prop.name }}.c_str(), len_{{ prop.name }});
+        GVariant * newVar_{{ prop.name }} = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_{{ prop.name }}, len_{{ prop.name }}, TRUE, g_free, data_{{ prop.name }});
+        property = Glib::Variant<std::string>(newVar_{{ prop.name }});
         {% else %}
         property = Glib::Variant<{{ prop.variant_type }}>::create({{ prop.cpptype_to_dbus }}({{ prop.name }}_get()));
         {% endif %}
@@ -188,7 +183,15 @@ void {{ class_name_with_namespace }}::{{ signal.name }}_emitter(
     std::vector<Glib::VariantBase> paramsList;
 
 {% for arg in signal.args %}
-    paramsList.push_back(Glib::Variant<{{ arg.variant_type }}>::create({{ arg.cpptype_to_dbus }}({{ arg.name }})));;
+    {% if arg.signature == "ay" %}
+    {{ arg.variant_type }} temp_{{ arg.name }} = {{ arg.name }};
+    gsize len_{{ arg.name }} = temp_{{ arg.name }}.size();
+    gpointer data_{{ arg.name }} = g_memdup (temp_{{ arg.name }}.c_str(), len_{{ arg.name }});
+    GVariant * newVar_{{ arg.name }} = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_{{ arg.name }}, len_{{ arg.name }}, TRUE, g_free, data_{{ arg.name }});
+    paramsList.push_back( Glib::Variant<std::string>(newVar_{{ arg.name }}) );
+    {% else %}
+    paramsList.push_back(Glib::Variant<{{ arg.variant_type }}>::create({{ arg.cpptype_to_dbus }}({{ arg.name }})));
+    {% endif %}
 {% endfor %}
 
     const Glib::VariantContainerBase params =
@@ -212,16 +215,11 @@ bool {{ class_name_with_namespace }}::{{ prop.name }}_set({{ prop.cpptype_in }} 
 {
     if ({{ prop.name }}_setHandler(value)) {
         {% if prop.signature == "ay" %}
-        gsize len;
-        char *data;
-
-        len = value.size();
-        data = g_strndup (value.c_str(), len);
-
-        GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
+        gsize len_{{ prop.name }} = value.size();
+        gpointer data_{{ prop.name }} = g_memdup (value.c_str(), len_{{ prop.name }});
+        GVariant * newVar_{{ prop.name }} = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_{{ prop.name }}, len_{{ prop.name }}, TRUE, g_free, data_{{ prop.name }});
         Glib::Variant<{{ prop.variant_type }}> value_get =
-            Glib::Variant<{{ prop.variant_type }}>(newVar);
+            Glib::Variant<{{ prop.variant_type }}>(newVar_{{ prop.name }});
         {% else %}
         Glib::Variant<{{ prop.variant_type }}> value_get =
             Glib::Variant<{{ prop.variant_type }}>::create({{ prop.cpptype_to_dbus }}({{ prop.name }}_get()));

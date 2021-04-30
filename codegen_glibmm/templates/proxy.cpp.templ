@@ -147,15 +147,10 @@ void {{ class_name_with_namespace }}::{{ prop.name }}_set({{ prop.cpptype_in }} 
     paramsVec.push_back(Glib::Variant<Glib::ustring>::create("{{ interface.name }}"));
     paramsVec.push_back(Glib::Variant<Glib::ustring>::create("{{ prop.name }}"));
     {% if prop.signature == "ay" %}
-    gsize len;
-    char *data;
-
-    len = value.size();
-    data = g_strndup (value.c_str(), len);
-
-    GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
-    paramsVec.push_back(Glib::Variant<Glib::VariantBase>::create(Glib::Variant<std::string>(newVar)));
+    gsize len_{{ prop.name }} = value.size();
+    gpointer data_{{ prop.name }} = g_memdup (value.c_str(), len_{{ prop.name }});
+    GVariant * newVar_{{ prop.name }} = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_{{ prop.name }}, len_{{ prop.name }}, TRUE, g_free, data_{{ prop.name }});
+    paramsVec.push_back(Glib::Variant<Glib::VariantBase>::create(Glib::Variant<std::string>(newVar_{{ prop.name }})));
     {% else %}
     paramsVec.push_back(Glib::Variant<Glib::VariantBase>::create(Glib::Variant<{{ prop.variant_type }}>::create({{ prop.cpptype_to_dbus }}(value))));
     {% endif %}
@@ -203,7 +198,7 @@ void {{ class_name_with_namespace }}::handle_signal(const Glib::ustring&/* sende
         Glib::Variant<{{ arg.variant_type }}> base_{{ arg.name }};
         parameters.get_child(base_{{ arg.name }}, {{ loop.index0 }});
         {{ arg.variant_type }} p_{{ arg.name }};
-        p_{{ arg.name }} = base_{{ arg.name }}.get();
+        p_{{ arg.name }} = specialGetter(base_{{ arg.name }});
 
     {% endfor %}
         {{ signal.name }}_signal.emit(

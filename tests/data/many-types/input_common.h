@@ -113,8 +113,11 @@ public:
     static Glib::VariantContainerBase TestByteString_pack(
         const std::string & arg_Param1) {
         Glib::VariantContainerBase base;
-        Glib::Variant<std::string> params =
-            Glib::Variant<std::string>::create(arg_Param1);
+        gsize len_params = arg_Param1.size();
+        gpointer data_params = g_memdup (arg_Param1.c_str(), len_params);
+        GVariant * newVar_params = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_params, len_params, TRUE, g_free, data_params);
+        Glib::Variant<std::string> params = Glib::Variant<std::string>( newVar_params );
+        
         return Glib::VariantContainerBase::create_tuple(params);
     }
 
@@ -270,8 +273,11 @@ public:
             Glib::Variant<std::vector<Glib::ustring>>::create(arg_in_Param3);
         params.push_back(in_Param3_param);
 
-        Glib::Variant<std::string> in_Param4_param =
-            Glib::Variant<std::string>::create(arg_in_Param4);
+        gsize len_in_Param4_param = arg_in_Param4.size();
+        gpointer data_in_Param4_param = g_memdup (arg_in_Param4.c_str(), len_in_Param4_param);
+        GVariant * newVar_in_Param4_param = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_in_Param4_param, len_in_Param4_param, TRUE, g_free, data_in_Param4_param);
+        Glib::Variant<std::string> in_Param4_param = Glib::Variant<std::string>( newVar_in_Param4_param );
+        
         params.push_back(in_Param4_param);
 
         Glib::VariantStringBase in_Param5_param;

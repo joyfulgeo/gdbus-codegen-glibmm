@@ -767,8 +767,11 @@ public:
 
     void ret(const std::string & p0) {
         std::vector<Glib::VariantBase> vlist;
-        Glib::Variant<std::string> var0 =
-            Glib::Variant<std::string>::create(p0);
+        gsize len_var0 = p0.size();
+        gpointer data_var0 = g_memdup (p0.c_str(), len_var0);
+        GVariant * newVar_var0 = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_var0, len_var0, TRUE, g_free, data_var0);
+        Glib::Variant<std::string> var0 = Glib::Variant<std::string>( newVar_var0 );
+        
         vlist.push_back(var0);
 
         m_message->return_value(Glib::Variant<Glib::VariantBase>::create_tuple(vlist));
@@ -920,8 +923,11 @@ public:
         Glib::Variant<std::vector<Glib::ustring>> var2 =
             Glib::Variant<std::vector<Glib::ustring>>::create(p2);
         vlist.push_back(var2);
-        Glib::Variant<std::string> var3 =
-            Glib::Variant<std::string>::create(p3);
+        gsize len_var3 = p3.size();
+        gpointer data_var3 = g_memdup (p3.c_str(), len_var3);
+        GVariant * newVar_var3 = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_var3, len_var3, TRUE, g_free, data_var3);
+        Glib::Variant<std::string> var3 = Glib::Variant<std::string>( newVar_var3 );
+        
         vlist.push_back(var3);
         Glib::VariantStringBase var4;
         Glib::VariantStringBase::create_signature(var4, p4.c_str());
