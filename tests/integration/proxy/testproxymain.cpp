@@ -615,7 +615,7 @@ void TestProxyImpl::proxy_created(const Glib::RefPtr<Gio::AsyncResult> result) {
         "First string", "", "After the empty one",
     };
 
-    std::string bytestring = "Hello world!";
+    std::string bytestring("Hello world! with\0NULL\0embedding", 32);
     std::string signatureValue = "b";
     std::string objectPath = "/foo";
     std::string stringValue = "String";
