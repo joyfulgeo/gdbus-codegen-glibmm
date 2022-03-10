@@ -479,7 +479,7 @@ void TestProxyImpl::on_test_signal_string_array_cb(const std::vector<Glib::ustri
 }
 
 void TestProxyImpl::on_test_signal_byte_string_cb(const std::string s) {
-    printStatus("Signal TestSignalByteString", true);
+    printStatus("Signal TestSignalByteString", s == "ByteString test" + std::string(" with\0NULL\0embedding", 20));
     record_signal();
 }
 
@@ -615,7 +615,7 @@ void TestProxyImpl::proxy_created(const Glib::RefPtr<Gio::AsyncResult> result) {
         "First string", "", "After the empty one",
     };
 
-    std::string bytestring = "Hello world!";
+    std::string bytestring = "Hello world!" + std::string(" with\0NULL\0embedding", 20);
     std::string signatureValue = "b";
     std::string objectPath = "/foo";
     std::string stringValue = "String";
@@ -772,11 +772,8 @@ void TestProxyImpl::proxy_created(const Glib::RefPtr<Gio::AsyncResult> result) {
     PropReadStringArrayValue.push_back("Value5");
     PropReadStringArrayValue.push_back("Value6");
     printStatus("Property (read): TestPropReadStringArray", m_proxy->TestPropReadStringArray_get() == PropReadStringArrayValue);
-
-    //std::string res = m_proxy->TestPropReadByteString_get();
-    //res.push_back('\0');
-    //std::cout << res << std::endl;
-    printStatus("Property (read): TestPropReadByteString", m_proxy->TestPropReadByteString_get() == std::string("Value7"));
+    
+    printStatus("Property (read): TestPropReadByteString", m_proxy->TestPropReadByteString_get() == "Value7" + std::string(" with\0NULL\0embedding", 20));
     printStatus("Property (read): TestPropReadSignature", m_proxy->TestPropReadSignature_get() == "sa{sv}a(bi)");
     printStatus("Property (read): TestPropReadObjectPath", m_proxy->TestPropReadObjectPath_get() == "/Value9");
     printStatus("Property (read): TestPropReadString", m_proxy->TestPropReadString_get() == "Value10");
@@ -808,7 +805,7 @@ void TestProxyImpl::proxy_created(const Glib::RefPtr<Gio::AsyncResult> result) {
     PropReadWriteStringArrayValue.push_back("Value24");
     printStatus("Property (read): TestPropReadWriteStringArrayValue", m_proxy->TestPropReadWriteStringArray_get() == PropReadWriteStringArrayValue);
 
-    printStatus("Property (read): TestPropReadWriteByteString", m_proxy->TestPropReadWriteByteString_get() == "Value25");
+    printStatus("Property (read): TestPropReadWriteByteString", m_proxy->TestPropReadWriteByteString_get() == "Value25"+ std::string(" with\0NULL\0embedding", 20));
     printStatus("Property (read): TestPropReadWriteSignature", m_proxy->TestPropReadWriteSignature_get() == "bada(ss)");
     printStatus("Property (read): TestPropReadWriteObjectPath", m_proxy->TestPropReadWriteObjectPath_get() == "/Value27");
     printStatus("Property (read): TestPropReadWriteString", m_proxy->TestPropReadWriteString_get() == "Value28");
@@ -845,9 +842,9 @@ void TestProxyImpl::proxy_created(const Glib::RefPtr<Gio::AsyncResult> result) {
                    PropReadWriteStringArrayValue2));
 
     m_proxy->TestPropReadWriteByteString_set(
-        "ByteString test",
+        "ByteString test" + std::string(" with\0NULL\0embedding", 20),
         sigc::bind(sigc::mem_fun(this, &TestProxyImpl::on_test_prop_read_write_byte_string),
-                   "ByteString test"));
+                   "ByteString test" + std::string(" with\0NULL\0embedding", 20)));
 
     m_proxy->TestPropReadWriteSignature_set("b", sigc::bind(sigc::mem_fun(this, &TestProxyImpl::on_test_prop_read_write_signature), "b"));
     m_proxy->TestPropReadWriteObjectPath_set("/some/where", sigc::bind(sigc::mem_fun(this, &TestProxyImpl::on_test_prop_read_write_object_path), "/some/where"));

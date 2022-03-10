@@ -10,7 +10,7 @@ TestImpl::TestImpl() {
     m_PropReadObjectPathArrayValue.push_back("/Value4");
     m_PropReadStringArrayValue.push_back("Value5");
     m_PropReadStringArrayValue.push_back("Value6");
-    m_PropReadByteStringValue = "Value7";
+    m_PropReadByteStringValue =  "Value7" + std::string(" with\0NULL\0embedding", 20);
     m_PropReadSignatureValue = "sa{sv}a(bi)";
     m_PropReadObjectPathValue = "/Value9";
     m_PropReadStringValue = "Value10";
@@ -46,7 +46,7 @@ TestImpl::TestImpl() {
     m_PropReadWriteByteStringArrayValue.push_back("Value22");
     m_PropReadWriteObjectPathArrayValue.push_back("/object/path");
     m_PropReadWriteStringArrayValue.push_back("Value24");
-    m_PropReadWriteByteStringValue = "Value25";
+    m_PropReadWriteByteStringValue = "Value25" + std::string(" with\0NULL\0embedding", 20);
     m_PropReadWriteSignatureValue = "bada(ss)";
     m_PropReadWriteObjectPathValue = "/Value27";
     m_PropReadWriteStringValue = "Value28";

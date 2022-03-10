@@ -431,7 +431,7 @@ void org::gdbus::codegen::glibmm::TestProxy::TestByteString_finish(
 
     Glib::Variant<std::string> out_Param2_v;
     wrapped.get_child(out_Param2_v, 0);
-    out_Param2 = out_Param2_v.get();
+    out_Param2 = specialGetter(out_Param2_v);
 }
 
 std::string
@@ -450,7 +450,7 @@ org::gdbus::codegen::glibmm::TestProxy::TestByteString_sync(
     std::string out_Param2;
     Glib::Variant<std::string> out_Param2_v;
     wrapped.get_child(out_Param2_v, 0);
-    out_Param2 = out_Param2_v.get();
+    out_Param2 = specialGetter(out_Param2_v);
     return out_Param2;
 }
 
@@ -1208,7 +1208,7 @@ void org::gdbus::codegen::glibmm::TestProxy::TestAll_finish(
 
     Glib::Variant<std::string> out_out_Param4_v;
     wrapped.get_child(out_out_Param4_v, 3);
-    out_out_Param4 = out_out_Param4_v.get();
+    out_out_Param4 = specialGetter(out_out_Param4_v);
 
     Glib::Variant<Glib::DBusSignatureString> out_out_Param5_v;
     wrapped.get_child(out_out_Param5_v, 4);
@@ -1320,7 +1320,7 @@ org::gdbus::codegen::glibmm::TestProxy::TestAll_sync(
     std::string out_out_Param4;
     Glib::Variant<std::string> out_out_Param4_v;
     wrapped.get_child(out_out_Param4_v, 3);
-    out_out_Param4 = out_out_Param4_v.get();
+    out_out_Param4 = specialGetter(out_out_Param4_v);
 
     Glib::DBusSignatureString out_out_Param5;
     Glib::Variant<Glib::DBusSignatureString> out_out_Param5_v;
@@ -1854,15 +1854,10 @@ void org::gdbus::codegen::glibmm::TestProxy::TestPropWriteByteString_set(const s
     std::vector<Glib::VariantBase> paramsVec;
     paramsVec.push_back(Glib::Variant<Glib::ustring>::create("org.gdbus.codegen.glibmm.Test"));
     paramsVec.push_back(Glib::Variant<Glib::ustring>::create("TestPropWriteByteString"));
-    gsize len;
-    char *data;
-
-    len = value.size();
-    data = g_strndup (value.c_str(), len);
-
-    GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
-    paramsVec.push_back(Glib::Variant<Glib::VariantBase>::create(Glib::Variant<std::string>(newVar)));
+    gsize len_TestPropWriteByteString = value.size();
+    gpointer data_TestPropWriteByteString = g_memdup (value.c_str(), len_TestPropWriteByteString);
+    GVariant * newVar_TestPropWriteByteString = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_TestPropWriteByteString, len_TestPropWriteByteString, TRUE, g_free, data_TestPropWriteByteString);
+    paramsVec.push_back(Glib::Variant<Glib::VariantBase>::create(Glib::Variant<std::string>(newVar_TestPropWriteByteString)));
 
     Glib::VariantContainerBase params = Glib::VariantContainerBase::create_tuple(paramsVec);
     m_proxy->call("org.freedesktop.DBus.Properties.Set", cb, params);
@@ -2326,15 +2321,10 @@ void org::gdbus::codegen::glibmm::TestProxy::TestPropReadWriteByteString_set(con
     std::vector<Glib::VariantBase> paramsVec;
     paramsVec.push_back(Glib::Variant<Glib::ustring>::create("org.gdbus.codegen.glibmm.Test"));
     paramsVec.push_back(Glib::Variant<Glib::ustring>::create("TestPropReadWriteByteString"));
-    gsize len;
-    char *data;
-
-    len = value.size();
-    data = g_strndup (value.c_str(), len);
-
-    GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
-    paramsVec.push_back(Glib::Variant<Glib::VariantBase>::create(Glib::Variant<std::string>(newVar)));
+    gsize len_TestPropReadWriteByteString = value.size();
+    gpointer data_TestPropReadWriteByteString = g_memdup (value.c_str(), len_TestPropReadWriteByteString);
+    GVariant * newVar_TestPropReadWriteByteString = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_TestPropReadWriteByteString, len_TestPropReadWriteByteString, TRUE, g_free, data_TestPropReadWriteByteString);
+    paramsVec.push_back(Glib::Variant<Glib::VariantBase>::create(Glib::Variant<std::string>(newVar_TestPropReadWriteByteString)));
 
     Glib::VariantContainerBase params = Glib::VariantContainerBase::create_tuple(paramsVec);
     m_proxy->call("org.freedesktop.DBus.Properties.Set", cb, params);
@@ -2942,7 +2932,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<std::vector<std::string>> base_Param1;
         parameters.get_child(base_Param1, 0);
         std::vector<std::string> p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalByteStringArray_signal.emit((p_Param1));
     }
@@ -2951,7 +2941,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<std::vector<Glib::DBusObjectPathString>> base_Param1;
         parameters.get_child(base_Param1, 0);
         std::vector<Glib::DBusObjectPathString> p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalObjectPathArray_signal.emit((p_Param1));
     }
@@ -2960,7 +2950,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<std::vector<Glib::ustring>> base_Param1;
         parameters.get_child(base_Param1, 0);
         std::vector<Glib::ustring> p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalStringArray_signal.emit((p_Param1));
     }
@@ -2969,7 +2959,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<std::string> base_Param1;
         parameters.get_child(base_Param1, 0);
         std::string p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalByteString_signal.emit((p_Param1));
     }
@@ -2978,7 +2968,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<Glib::DBusSignatureString> base_Param1;
         parameters.get_child(base_Param1, 0);
         Glib::DBusSignatureString p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalSignature_signal.emit((p_Param1));
     }
@@ -2987,7 +2977,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<Glib::DBusObjectPathString> base_Param1;
         parameters.get_child(base_Param1, 0);
         Glib::DBusObjectPathString p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalObjectPath_signal.emit((p_Param1));
     }
@@ -2996,7 +2986,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<Glib::ustring> base_Param1;
         parameters.get_child(base_Param1, 0);
         Glib::ustring p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalString_signal.emit((p_Param1));
     }
@@ -3005,7 +2995,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<double> base_Param1;
         parameters.get_child(base_Param1, 0);
         double p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalDouble_signal.emit((p_Param1));
     }
@@ -3014,7 +3004,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<guint64> base_Param1;
         parameters.get_child(base_Param1, 0);
         guint64 p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalUInt64_signal.emit((p_Param1));
     }
@@ -3023,7 +3013,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<gint64> base_Param1;
         parameters.get_child(base_Param1, 0);
         gint64 p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalInt64_signal.emit((p_Param1));
     }
@@ -3032,7 +3022,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<guint32> base_Param1;
         parameters.get_child(base_Param1, 0);
         guint32 p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalUInt_signal.emit((p_Param1));
     }
@@ -3041,7 +3031,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<gint32> base_Param1;
         parameters.get_child(base_Param1, 0);
         gint32 p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalInt_signal.emit((p_Param1));
     }
@@ -3050,7 +3040,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<guint16> base_Param1;
         parameters.get_child(base_Param1, 0);
         guint16 p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalUInt16_signal.emit((p_Param1));
     }
@@ -3059,7 +3049,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<gint16> base_Param1;
         parameters.get_child(base_Param1, 0);
         gint16 p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalInt16_signal.emit((p_Param1));
     }
@@ -3068,7 +3058,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<guchar> base_Param1;
         parameters.get_child(base_Param1, 0);
         guchar p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalChar_signal.emit((p_Param1));
     }
@@ -3077,7 +3067,7 @@ void org::gdbus::codegen::glibmm::TestProxy::handle_signal(const Glib::ustring&/
         Glib::Variant<bool> base_Param1;
         parameters.get_child(base_Param1, 0);
         bool p_Param1;
-        p_Param1 = base_Param1.get();
+        p_Param1 = specialGetter(base_Param1);
 
         TestSignalBoolean_signal.emit((p_Param1));
     }

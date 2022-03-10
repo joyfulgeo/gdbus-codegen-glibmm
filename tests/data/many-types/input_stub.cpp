@@ -868,16 +868,11 @@ void org::gdbus::codegen::glibmm::TestStub::on_interface_get_property(
 
     if (property_name.compare("TestPropReadByteString") == 0) {
 
-        gsize len;
-        char *data;
-
-        std::string temp = TestPropReadByteString_get();
-        len = temp.size();
-        data = g_strndup (temp.c_str(), len);
-
-        GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
-        property = Glib::Variant<std::string>(newVar);
+        std::string temp_TestPropReadByteString = TestPropReadByteString_get();
+        gsize len_TestPropReadByteString = temp_TestPropReadByteString.size();
+        gpointer data_TestPropReadByteString = g_memdup (temp_TestPropReadByteString.c_str(), len_TestPropReadByteString);
+        GVariant * newVar_TestPropReadByteString = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_TestPropReadByteString, len_TestPropReadByteString, TRUE, g_free, data_TestPropReadByteString);
+        property = Glib::Variant<std::string>(newVar_TestPropReadByteString);
     }
 
     if (property_name.compare("TestPropReadSignature") == 0) {
@@ -962,16 +957,11 @@ void org::gdbus::codegen::glibmm::TestStub::on_interface_get_property(
 
     if (property_name.compare("TestPropReadWriteByteString") == 0) {
 
-        gsize len;
-        char *data;
-
-        std::string temp = TestPropReadWriteByteString_get();
-        len = temp.size();
-        data = g_strndup (temp.c_str(), len);
-
-        GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
-        property = Glib::Variant<std::string>(newVar);
+        std::string temp_TestPropReadWriteByteString = TestPropReadWriteByteString_get();
+        gsize len_TestPropReadWriteByteString = temp_TestPropReadWriteByteString.size();
+        gpointer data_TestPropReadWriteByteString = g_memdup (temp_TestPropReadWriteByteString.c_str(), len_TestPropReadWriteByteString);
+        GVariant * newVar_TestPropReadWriteByteString = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_TestPropReadWriteByteString, len_TestPropReadWriteByteString, TRUE, g_free, data_TestPropReadWriteByteString);
+        property = Glib::Variant<std::string>(newVar_TestPropReadWriteByteString);
     }
 
     if (property_name.compare("TestPropReadWriteSignature") == 0) {
@@ -1456,7 +1446,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalByteStringArray_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<std::vector<std::string>>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<std::vector<std::string>>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1477,7 +1467,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalObjectPathArray_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<std::vector<Glib::DBusObjectPathString>>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<std::vector<Glib::DBusObjectPathString>>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1498,7 +1488,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalStringArray_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<std::vector<Glib::ustring>>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<std::vector<Glib::ustring>>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1519,7 +1509,11 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalByteString_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<std::string>::create((Param1)));;
+    std::string temp_Param1 = Param1;
+    gsize len_Param1 = temp_Param1.size();
+    gpointer data_Param1 = g_memdup (temp_Param1.c_str(), len_Param1);
+    GVariant * newVar_Param1 = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_Param1, len_Param1, TRUE, g_free, data_Param1);
+    paramsList.push_back( Glib::Variant<std::string>(newVar_Param1) );
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1540,7 +1534,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalSignature_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<Glib::DBusSignatureString>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<Glib::DBusSignatureString>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1561,7 +1555,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalObjectPath_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<Glib::DBusObjectPathString>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<Glib::DBusObjectPathString>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1582,7 +1576,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalString_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<Glib::ustring>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<Glib::ustring>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1603,7 +1597,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalDouble_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<double>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<double>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1624,7 +1618,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalUInt64_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<guint64>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<guint64>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1645,7 +1639,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalInt64_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<gint64>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<gint64>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1666,7 +1660,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalUInt_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<guint32>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<guint32>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1687,7 +1681,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalInt_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<gint32>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<gint32>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1708,7 +1702,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalUInt16_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<guint16>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<guint16>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1729,7 +1723,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalInt16_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<gint16>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<gint16>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1750,7 +1744,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalChar_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<guchar>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<guchar>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1771,7 +1765,7 @@ void org::gdbus::codegen::glibmm::TestStub::TestSignalBoolean_emitter(
 {
     std::vector<Glib::VariantBase> paramsList;
 
-    paramsList.push_back(Glib::Variant<bool>::create((Param1)));;
+    paramsList.push_back(Glib::Variant<bool>::create((Param1)));
 
     const Glib::VariantContainerBase params =
         Glib::Variant<std::vector<Glib::VariantBase>>::create_tuple(paramsList);
@@ -1830,16 +1824,11 @@ bool org::gdbus::codegen::glibmm::TestStub::TestPropReadStringArray_set(const st
 bool org::gdbus::codegen::glibmm::TestStub::TestPropReadByteString_set(const std::string & value)
 {
     if (TestPropReadByteString_setHandler(value)) {
-        gsize len;
-        char *data;
-
-        len = value.size();
-        data = g_strndup (value.c_str(), len);
-
-        GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
+        gsize len_TestPropReadByteString = value.size();
+        gpointer data_TestPropReadByteString = g_memdup (value.c_str(), len_TestPropReadByteString);
+        GVariant * newVar_TestPropReadByteString = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_TestPropReadByteString, len_TestPropReadByteString, TRUE, g_free, data_TestPropReadByteString);
         Glib::Variant<std::string> value_get =
-            Glib::Variant<std::string>(newVar);
+            Glib::Variant<std::string>(newVar_TestPropReadByteString);
 
         emitSignal("TestPropReadByteString", value_get);
         return true;
@@ -2059,16 +2048,11 @@ bool org::gdbus::codegen::glibmm::TestStub::TestPropWriteStringArray_set(const s
 bool org::gdbus::codegen::glibmm::TestStub::TestPropWriteByteString_set(const std::string & value)
 {
     if (TestPropWriteByteString_setHandler(value)) {
-        gsize len;
-        char *data;
-
-        len = value.size();
-        data = g_strndup (value.c_str(), len);
-
-        GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
+        gsize len_TestPropWriteByteString = value.size();
+        gpointer data_TestPropWriteByteString = g_memdup (value.c_str(), len_TestPropWriteByteString);
+        GVariant * newVar_TestPropWriteByteString = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_TestPropWriteByteString, len_TestPropWriteByteString, TRUE, g_free, data_TestPropWriteByteString);
         Glib::Variant<std::string> value_get =
-            Glib::Variant<std::string>(newVar);
+            Glib::Variant<std::string>(newVar_TestPropWriteByteString);
 
         emitSignal("TestPropWriteByteString", value_get);
         return true;
@@ -2275,16 +2259,11 @@ bool org::gdbus::codegen::glibmm::TestStub::TestPropReadWriteStringArray_set(con
 bool org::gdbus::codegen::glibmm::TestStub::TestPropReadWriteByteString_set(const std::string & value)
 {
     if (TestPropReadWriteByteString_setHandler(value)) {
-        gsize len;
-        char *data;
-
-        len = value.size();
-        data = g_strndup (value.c_str(), len);
-
-        GVariant * newVar = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data, len, TRUE, g_free, data);
-
+        gsize len_TestPropReadWriteByteString = value.size();
+        gpointer data_TestPropReadWriteByteString = g_memdup (value.c_str(), len_TestPropReadWriteByteString);
+        GVariant * newVar_TestPropReadWriteByteString = g_variant_new_from_data (G_VARIANT_TYPE ("ay"), data_TestPropReadWriteByteString, len_TestPropReadWriteByteString, TRUE, g_free, data_TestPropReadWriteByteString);
         Glib::Variant<std::string> value_get =
-            Glib::Variant<std::string>(newVar);
+            Glib::Variant<std::string>(newVar_TestPropReadWriteByteString);
 
         emitSignal("TestPropReadWriteByteString", value_get);
         return true;
